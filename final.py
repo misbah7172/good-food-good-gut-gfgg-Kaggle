@@ -58,33 +58,18 @@ LGB_BASE = dict(
     objective          = "binary",
     metric             = "binary_logloss",
     boosting_type      = "gbdt",
-    num_leaves         = 127,
-    min_data_in_leaf   = 20,
-    feature_fraction   = 0.8,
-    bagging_fraction   = 0.8,
-    bagging_freq       = 1,
-    lambda_l1          = 0.1,
-    lambda_l2          = 1.0,
-    learning_rate      = 0.03,
     is_unbalance       = True,
     n_jobs             = -1,
     verbose            = -1,
-    seed               = 42,
 )
 
 LGB_CONFIGS = [
     # lgb1 — deep, regularised
-    dict(**LGB_BASE, num_leaves=127, learning_rate=0.03,
-         feature_fraction=0.8, bagging_fraction=0.8,
-         lambda_l1=0.1, lambda_l2=1.0, seed=42),
+    dict(**LGB_BASE, num_leaves=127, learning_rate=0.03, seed=42),
     # lgb2 — shallower, faster convergence
-    dict(**LGB_BASE, num_leaves=63, learning_rate=0.05,
-         feature_fraction=0.7, bagging_fraction=0.7,
-         lambda_l1=0.5, lambda_l2=2.0, seed=7),
+    dict(**LGB_BASE, num_leaves=63, learning_rate=0.05, feature_fraction=0.7, bagging_fraction=0.7, lambda_l1=0.5, lambda_l2=2.0, seed=7),
     # lgb3 — very deep, strong regularisation
-    dict(**LGB_BASE, num_leaves=255, learning_rate=0.02,
-         feature_fraction=0.9, bagging_fraction=0.9,
-         lambda_l1=0.05, lambda_l2=0.5, seed=99),
+    dict(**LGB_BASE, num_leaves=255, learning_rate=0.02, feature_fraction=0.9, bagging_fraction=0.9, lambda_l1=0.05, lambda_l2=0.5, seed=99),
 ]
 
 # Early stopping: train up to 3000 rounds, stop if no improvement for 80
